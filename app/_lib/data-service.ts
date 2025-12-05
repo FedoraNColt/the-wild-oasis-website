@@ -10,11 +10,12 @@ import {
   NewGuest,
 } from "@/app/types";
 import supabase from "./supabase";
+import { notFound } from "next/navigation";
 
 /////////////
 // GET
 
-export async function getCabin(id: number): Promise<Cabin | null> {
+export async function getCabin(id: number): Promise<Cabin> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -26,9 +27,10 @@ export async function getCabin(id: number): Promise<Cabin | null> {
 
   if (error) {
     console.error(error);
+    notFound();
   }
 
-  return (data as Cabin) ?? null;
+  return data as Cabin;
 }
 
 export async function getCabinPrice(
@@ -50,9 +52,7 @@ export async function getCabinPrice(
 export const getCabins = async function (): Promise<Cabin[]> {
   const { data, error } = await supabase
     .from("cabins")
-    .select(
-      "id, name, maxCapacity, regularPrice, discount, image, description"
-    )
+    .select("id, name, maxCapacity, regularPrice, discount, image, description")
     .order("name");
 
   if (error) {
@@ -248,10 +248,7 @@ export async function updateGuest(id: number, updatedFields: GuestUpdate) {
   return data;
 }
 
-export async function updateBooking(
-  id: number,
-  updatedFields: BookingUpdate
-) {
+export async function updateBooking(id: number, updatedFields: BookingUpdate) {
   const { data, error } = await supabase
     .from("bookings")
     .update(updatedFields)
