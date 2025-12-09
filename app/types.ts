@@ -46,9 +46,9 @@ export type Guest = {
   id: number;
   fullName: string;
   email: string;
-  nationality: string;
-  countryFlag: string;
-  nationalID: string;
+  nationality?: string;
+  countryFlag?: string;
+  nationalID?: string;
   created_at: string;
 };
 
