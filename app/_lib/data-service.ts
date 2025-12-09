@@ -8,6 +8,7 @@ import {
   GuestUpdate,
   NewBooking,
   NewGuest,
+  Settings,
 } from "@/app/types";
 import supabase from "./supabase";
 import { notFound } from "next/navigation";
@@ -176,7 +177,7 @@ export async function getBookedDatesByCabinId(cabinId: number) {
   return bookedDates;
 }
 
-export async function getSettings() {
+export async function getSettings(): Promise<Settings> {
   const { data, error } = await supabase.from("settings").select("*").single();
 
   if (error) {

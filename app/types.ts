@@ -1,5 +1,13 @@
 export type status = "unconfirmed" | "checked-in" | "checked-out";
 
+export type CustomerProfile = {
+  fullName: string;
+  email: string;
+  contryFlag: string;
+  nationality: string;
+  nationalID: string;
+};
+
 export type Cabin = {
   id: number;
   name: string;
@@ -65,3 +73,10 @@ export type NewBooking = {
 };
 
 export type BookingUpdate = Partial<NewBooking>;
+
+export type Settings = {
+  minBookingLength: number;
+  maxBookingLength: number;
+  maxGuestsPerBooking: number;
+  breakfastPrice: number;
+};
