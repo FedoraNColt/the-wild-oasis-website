@@ -34,6 +34,7 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
 
   const cabinName = cabin?.name ?? "Cabin";
   const cabinImage = cabin?.image ?? "/cabin.jpg";
+  const guestsCount = numGuests ?? 0;
 
   return (
     <div className="flex border border-primary-800">
@@ -74,7 +75,7 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
           <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
           <p className="text-primary-300">&bull;</p>
           <p className="text-lg text-primary-300">
-            {numGuests} guest{numGuests > 1 && "s"}
+            {guestsCount} guest{guestsCount === 1 ? "" : "s"}
           </p>
           <p className="ml-auto text-sm text-primary-400">
             Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
