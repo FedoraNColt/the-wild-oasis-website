@@ -15,6 +15,8 @@ function ReservationForm({ cabin, user }: { cabin: Cabin; user: User }) {
   const { range, resetRange } =
     useReservationContext() as ReservationContextType;
   const { regularPrice, discount, id } = cabin;
+  const userImage = user.image ?? "/logo.png";
+  const userName = user.name ?? "Guest";
   const startDate = range?.from
     ? new Date(
         Date.UTC(
@@ -66,10 +68,10 @@ function ReservationForm({ cabin, user }: { cabin: Cabin; user: User }) {
             // Important to display google profile images
             referrerPolicy="no-referrer"
             className="h-8 rounded-full"
-            src={user.image}
-            alt={user.name}
+            src={userImage}
+            alt={userName}
           />
-          <p>{user.name}</p>
+          <p>{userName}</p>
         </div>
       </div>
 
