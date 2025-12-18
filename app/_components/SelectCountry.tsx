@@ -3,14 +3,14 @@ import { getCountries } from "@/app/_lib/data-service";
 // Let's imagine your colleague already built this component 😃
 
 interface SelectCountryProps {
-  defaultCountry: string;
+  defaultCountry: string | null;
   name: string;
   id: string;
   className: string;
 }
 
 async function SelectCountry({
-  defaultCountry,
+  defaultCountry = "",
   name,
   id,
   className,
@@ -21,6 +21,7 @@ async function SelectCountry({
 
   return (
     <select
+      key={defaultCountry}
       name={name}
       id={id}
       // Here we use a trick to encode BOTH the country name and the flag into the value. Then we split them up again later in the server action
