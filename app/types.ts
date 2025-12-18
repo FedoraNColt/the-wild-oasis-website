@@ -20,22 +20,25 @@ export type Cabin = {
 
 export type Booking = {
   id: number;
-  guestId: number;
+  guestId?: number;
   cabinId: number;
-  startDate: string;
-  endDate: string;
+  startDate: string | Date;
+  endDate: string | Date;
   numNights: number;
   totalPrice: number;
-  numGuests: number;
+  numGuests?: number;
   status: status;
   created_at: string;
+  cabin?: Cabin;
   observations?: string;
   hasBreakfast?: boolean;
   extrasPrice?: number;
   cabinPrice?: number;
   isPaid?: boolean;
-  cabin: Cabin;
 };
+
+export type NewBooking = Omit<Booking, "id" | "created_at">;
+export type BookingUpdate = Partial<NewBooking>;
 
 export type Country = {
   name: string;
@@ -46,33 +49,18 @@ export type Guest = {
   id: number;
   fullName: string;
   email: string;
-  nationality?: string;
-  countryFlag?: string;
-  nationalID?: string;
+  nationality: string | null;
+  countryFlag: string | null;
+  nationalID: string | null;
   created_at: string;
 };
 
-export type NewGuest = Omit<Guest, "id" | "created_at">;
-
-export type GuestUpdate = Partial<Omit<Guest, "id" | "created_at" | "email">>;
-
-export type NewBooking = {
-  startDate: string;
-  endDate: string;
-  numNights: number;
-  numGuests: number;
-  totalPrice: number;
-  status?: status;
-  hasBreakfast?: boolean;
-  observations?: string;
-  extrasPrice?: number;
-  cabinPrice?: number;
-  isPaid?: boolean;
-  cabinId: number;
-  guestId: number;
+export type NewGuest = {
+  email: string;
+  fullName: string;
 };
 
-export type BookingUpdate = Partial<NewBooking>;
+export type GuestUpdate = Partial<Omit<Guest, "id" | "created_at" | "email">>;
 
 export type Settings = {
   minBookingLength: number;
