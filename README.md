@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Wild Oasis Website
 
-## Getting Started
+Next.js 16 app for browsing cabins, reserving stays, and managing guest profiles. Bookings are stored in Supabase and authenticated with Google via NextAuth.
 
-First, run the development server:
+## Features
+- Browse cabins and reserve date ranges with UTC-normalized bookings.
+- Account area to view, edit, and delete reservations (optimistic updates).
+- Guest profile editing with nationality selection and Google sign-in.
+- Thank-you flow after booking with links back to your reservations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
+- Node.js 18+
+- Supabase project (URL and service role key)
+- Google OAuth app for NextAuth
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Create `.env.local` with required values:
+   ```bash
+   SUPABASE_URL=<your-supabase-url>
+   SUPABASE_KEY=<your-supabase-service-role-key>
+   AUTH_SECRET=<random-string>
+   AUTH_GOOGLE_ID=<google-client-id>
+   AUTH_GOOGLE_SECRET=<google-client-secret>
+   ```
+3. Run the dev server:
+   ```bash
+   npm run dev
+   ```
+4. Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+- `npm run dev` – start Next.js in development.
+- `npm run build` – create production build.
+- `npm run start` – serve the production build.
+- `npm run prod` – build then start (one command).
+- `npm run lint` – run ESLint.
