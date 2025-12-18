@@ -1,40 +1,46 @@
+"use client";
+
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
-import DeleteReservation from "./DeleteReservation";
-import { Booking } from "@/app/types";
 import Image from "next/image";
 import Link from "next/link";
+import DeleteReservation from "./DeleteReservation";
+import { Booking } from "@/app/types";
 
 interface ReservationCardProps {
   booking: Booking;
   onDelete: (bookingId: number) => void;
 }
 
-export const formatDistanceFromNow = (dateStr: string) =>
-  formatDistance(parseISO(dateStr), new Date(), {
+const toDate = (value: string | Date) =>
+  typeof value === "string" ? parseISO(value) : value;
+
+export const formatDistanceFromNow = (date: string | Date) =>
+  formatDistance(toDate(date), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
 
 function ReservationCard({ booking, onDelete }: ReservationCardProps) {
   const {
     id,
-    guestId,
     startDate,
     endDate,
     numNights,
     totalPrice,
     numGuests,
-    status,
     created_at,
-    cabin: { name, image },
+    cabin,
   } = booking;
+
+  const cabinName = cabin?.name ?? "Cabin";
+  const cabinImage = cabin?.image ?? "/cabin.jpg";
 
   return (
     <div className="flex border border-primary-800">
       <div className="relative h-32 aspect-square">
         <Image
-          src={image}
-          alt={`Cabin ${name}`}
+          src={cabinImage}
+          alt={`Cabin ${cabinName}`}
           fill
           className="object-cover border-r border-primary-800"
         />
@@ -43,7 +49,7 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
       <div className="grow px-6 py-3 flex flex-col">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold">
-            {numNights} nights in Cabin {name}
+            {numNights} nights in Cabin {cabinName}
           </h3>
           {isPast(new Date(startDate)) ? (
             <span className="bg-yellow-800 text-yellow-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
